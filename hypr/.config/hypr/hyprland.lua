@@ -239,10 +239,13 @@ hl.bind(mainMod .. " + Z", hl.dsp.window.drag(), {mouse = true})
 hl.bind(mainMod .. " + X", hl.dsp.window.resize(), {mouse = true})
 
 -- Resize windows with mainMod + CTRL + arrow keys
-hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({x = 30, y = 0}), {repeating = true})
-hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.resize({x = -30, y = 0}), {repeating = true})
-hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.resize({x = 0, y = -30}), {repeating = true})
-hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.resize({x = 0, y = 30}), {repeating = true})
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({x = 30, y = 0, relative = true}), {repeating = true})
+
+hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.resize({x = -30, y = 0, relative = true}), {repeating = true})
+
+hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.resize({x = 0, y = -30, relative = true}), {repeating = true})
+
+hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.resize({x = 0, y = 30, relative = true}), {repeating = true})
 
 -- Clipboard
 hl.bind("SUPER + V", hl.dsp.exec_cmd("cliphist list | tofi -c ~/.config/tofi/configV | cliphist decode | wl-copy"))
