@@ -2,15 +2,26 @@
 ---- MONITORS ----
 ------------------
 
-hl.monitor(
-    {
-        output = "",
-        mode = "preferred",
-        position = "auto",
-        scale = 1,
-        mirror = "DP-1"
-    }
-)
+hl.monitor({
+    output = "DVI-I-2",
+    mode = "3440x1440@60",
+    position = "0x0",
+    scale = 1,
+})
+
+hl.monitor({
+    output = "DVI-I-1",
+    mode = "2560x1440@120",
+    position = "3440x0",
+    scale = 1,
+})
+
+hl.monitor({
+    output = "eDP-1",
+    mode = "preferred",
+    position = "6000x180", -- center the 1080p laptop vertically
+    scale = 1,
+})
 
 ---------------------
 ---- MY PROGRAMS ----
