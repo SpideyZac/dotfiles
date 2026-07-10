@@ -1,7 +1,9 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: JetBrainsMono Nerd Font, monospace;
+    font-family:
+        JetBrainsMono Nerd Font,
+        monospace;
     font-weight: bold;
     font-size: 14px;
     min-height: 0;
@@ -36,7 +38,7 @@ window#waybar {
 
 #workspaces button:hover {
     background: #cdd6f4;
-    color: #11111b; 
+    color: #11111b;
     border-radius: 10px;
 }
 
@@ -97,9 +99,8 @@ window#waybar {
 }
 
 #network {
-    color:  #a6adc8;
+    color: #a6adc8;
     border-radius: 10px 0px 0px 10px;
-
 }
 
 #pulseaudio {
@@ -117,7 +118,7 @@ window#waybar {
 }
 
 #battery {
-    color:#a6adc8;
+    color: #a6adc8;
     border-radius: 0px 10px 10px 0px;
     margin-right: 10px;
 }
