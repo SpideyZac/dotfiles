@@ -35,9 +35,9 @@ hl.on(
         hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1") -- Polkit to manage passwords
         hl.exec_cmd("/usr/bin/dunst")
         hl.exec_cmd("waybar") -- topbar
-        hl.exec_cmd("swww-daemon") -- wallpaper daemon
+        hl.exec_cmd("awww-daemon") -- wallpaper daemon
         hl.exec_cmd(
-            "swww img ~/.config/assets/backgrounds/cat_leaves.png --transition-fps 255 --transition-type outer --transition-duration 0.8"
+            "awww img ~/.config/assets/backgrounds/cat_leaves.png --transition-fps 255 --transition-type outer --transition-duration 0.8"
         )
         hl.exec_cmd("wl-paste --type text --watch cliphist store") -- clipboard
         hl.exec_cmd("wl-paste --type image --watch cliphist store")
