@@ -283,7 +283,6 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 5%-"), {locked
 --------------------------------
 
 hl.window_rule({match = {class = "^(jome)$"}, float = true})
-
 hl.window_rule({match = {class = "^(kvantummanager)$"}, float = true})
 hl.window_rule({match = {class = "^(qt5ct)$"}, float = true})
 hl.window_rule({match = {class = "^(qt6ct)$"}, float = true})
