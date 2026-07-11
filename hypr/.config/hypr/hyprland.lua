@@ -32,7 +32,7 @@ local fileManager = "thunar"
 local menu = "tofi-drun -c ~/.config/tofi/configA --drun-launch=true"
 local browser = "brave --enable-features=UseOzonePlatform --ozone-platform=wayland"
 local notes = "obsidian"
-local editor = ""
+local editor = "kitty nvim"
 local editorAlt = "subl"
 local colorPicker = "hyprpicker"
 
