@@ -32,7 +32,7 @@ local fileManager = "thunar"
 local menu = "tofi-drun -c ~/.config/tofi/configA --drun-launch=true"
 local browser = "brave --enable-features=UseOzonePlatform --ozone-platform=wayland"
 local notes = "obsidian"
-local editor = "code"
+local editor = "code --password-store=gnome-libsecret"
 local editorAlt = "subl"
 local colorPicker = "hyprpicker"
 
@@ -53,6 +53,8 @@ hl.on(
         hl.exec_cmd("wl-paste --type text --watch cliphist store") -- clipboard
         hl.exec_cmd("wl-paste --type image --watch cliphist store")
         hl.exec_cmd("hypridle")
+        hl.exec_cmd("gnome-keyring-daemon --start --components=secrets")
+hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP GNOME_KEYRING_CONTROL")
         hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
         hl.exec_cmd("nm-applet")
     end
