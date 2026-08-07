@@ -203,91 +203,180 @@ hl.gesture(
 
 local mainMod = "SUPER"
 
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd(notes))
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(editor))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(editorAlt))
-hl.bind(mainMod .. " + Q", hl.dsp.window.close())
-hl.bind(mainMod .. " + M", hl.dsp.exit())
-hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + W", hl.dsp.window.float({action = "toggle"}))
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + SHIFT + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal), { description = "Open terminal" })
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser), { description = "Open browser" })
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd(notes), { description = "Open notes" })
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(editor), { description = "Open editor" })
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(editorAlt), { description = "Open alternate editor" })
+hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Close active window" })
+hl.bind(mainMod .. " + M", hl.dsp.exit(), { description = "Exit Hyprland" })
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager), { description = "Open file manager" })
+hl.bind(mainMod .. " + W", hl.dsp.window.float({action = "toggle"}), { description = "Toggle floating window" })
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(menu), { description = "Open application launcher" })
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.window.pseudo(), { description = "Toggle pseudo tiling" })
+hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"), { description = "Toggle split orientation" })
 
-hl.bind("SUPER + E", hl.dsp.exec_cmd("jome -d | wl-copy")) -- Emoji picker + clipboard copy
+hl.bind("SUPER + E", hl.dsp.exec_cmd("jome -d | wl-copy"), { description = "Emoji picker" })
 
--- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left", hl.dsp.focus({direction = "left"}))
-hl.bind(mainMod .. " + right", hl.dsp.focus({direction = "right"}))
-hl.bind(mainMod .. " + up", hl.dsp.focus({direction = "up"}))
-hl.bind(mainMod .. " + down", hl.dsp.focus({direction = "down"}))
+-- Focus
+hl.bind(mainMod .. " + left", hl.dsp.focus({direction = "left"}), { description = "Focus left" })
+hl.bind(mainMod .. " + right", hl.dsp.focus({direction = "right"}), { description = "Focus right" })
+hl.bind(mainMod .. " + up", hl.dsp.focus({direction = "up"}), { description = "Focus up" })
+hl.bind(mainMod .. " + down", hl.dsp.focus({direction = "down"}), { description = "Focus down" })
 
--- Move window position with mainMod + SHIFT + arrow keys
-hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move({direction = "left"}))
-hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({direction = "right"}))
-hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move({direction = "up"}))
-hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move({direction = "down"}))
+-- Move windows
+hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move({direction = "left"}), { description = "Move window left" })
+hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({direction = "right"}), { description = "Move window right" })
+hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move({direction = "up"}), { description = "Move window up" })
+hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move({direction = "down"}), { description = "Move window down" })
 
--- Switch workspaces with mainMod + [0-9]
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({workspace = i}))
-    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({workspace = i}))
+    local key = i % 10
+    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({workspace = i}), {
+        description = "Switch to workspace " .. i
+    })
+    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({workspace = i}), {
+        description = "Move window to workspace " .. i
+    })
 end
 
--- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), {mouse = true})
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), {mouse = true})
+-- Mouse
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), {
+    mouse = true,
+    description = "Drag window"
+})
 
--- Move/resize windows + keyboard
-hl.bind(mainMod .. " + Z", hl.dsp.window.drag(), {mouse = true})
-hl.bind(mainMod .. " + X", hl.dsp.window.resize(), {mouse = true})
+hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), {
+    mouse = true,
+    description = "Resize window"
+})
 
--- Resize windows with mainMod + CTRL + arrow keys
-hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({x = 30, y = 0, relative = true}), {repeating = true})
+hl.bind(mainMod .. " + Z", hl.dsp.window.drag(), {
+    mouse = true,
+    description = "Keyboard drag window"
+})
 
-hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.resize({x = -30, y = 0, relative = true}), {repeating = true})
+hl.bind(mainMod .. " + X", hl.dsp.window.resize(), {
+    mouse = true,
+    description = "Keyboard resize window"
+})
 
-hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.resize({x = 0, y = -30, relative = true}), {repeating = true})
+-- Resize
+hl.bind(mainMod .. " + CTRL + right",
+    hl.dsp.window.resize({x = 30, y = 0, relative = true}),
+    {repeating = true, description = "Grow window right"})
 
-hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.resize({x = 0, y = 30, relative = true}), {repeating = true})
+hl.bind(mainMod .. " + CTRL + left",
+    hl.dsp.window.resize({x = -30, y = 0, relative = true}),
+    {repeating = true, description = "Grow window left"})
+
+hl.bind(mainMod .. " + CTRL + up",
+    hl.dsp.window.resize({x = 0, y = -30, relative = true}),
+    {repeating = true, description = "Grow window up"})
+
+hl.bind(mainMod .. " + CTRL + down",
+    hl.dsp.window.resize({x = 0, y = 30, relative = true}),
+    {repeating = true, description = "Grow window down"})
 
 -- Clipboard
-hl.bind("SUPER + V", hl.dsp.exec_cmd("cliphist list | tofi -c ~/.config/tofi/configV | cliphist decode | wl-copy"))
+hl.bind("SUPER + V",
+    hl.dsp.exec_cmd("cliphist list | tofi -c ~/.config/tofi/configV | cliphist decode | wl-copy"),
+    { description = "Clipboard history" })
 
--- Colour picker
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(colorPicker .. " | wl-copy"))
+-- Color picker
+hl.bind(mainMod .. " + P",
+    hl.dsp.exec_cmd(colorPicker .. " | wl-copy"),
+    { description = "Pick screen color" })
 
--- Screen locking
-hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
+-- Lock
+hl.bind("SUPER + L",
+    hl.dsp.exec_cmd("hyprlock"),
+    { description = "Lock screen" })
 
--- wlogout
-hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("wlogout"))
+-- Logout menu
+hl.bind("SUPER + ESCAPE",
+    hl.dsp.exec_cmd("wlogout"),
+    { description = "Logout menu" })
 
--- waybar
-hl.bind("CTRL + ESCAPE", hl.dsp.exec_cmd("killall waybar || waybar")) -- toggle waybar
+-- Toggle Waybar
+hl.bind("CTRL + ESCAPE",
+    hl.dsp.exec_cmd("killall waybar || waybar"),
+    { description = "Toggle Waybar" })
 
 -- Screenshots
-hl.bind("Print", hl.dsp.exec_cmd("grimblast --notify copysave screen"), {locked = true}) -- entire screen + clipboard copy
-hl.bind("SUPER + Print", hl.dsp.exec_cmd("grimblast --notify copysave active"), {locked = true}) -- current active window + clipboard copy
-hl.bind("SUPER + ALT + Print", hl.dsp.exec_cmd("grimblast --notify copysave area"), {locked = true}) -- select an area
+hl.bind("Print",
+    hl.dsp.exec_cmd("grimblast --notify copysave screen"),
+    {locked = true, description = "Screenshot entire screen"})
 
--- Volume and media control
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("pamixer -i 5"), {locked = true, repeating = true})
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("pamixer -d 5"), {locked = true, repeating = true})
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("pamixer --default-source -m"), {locked = true})
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("pamixer -t"), {locked = true})
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), {locked = true})
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), {locked = true})
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), {locked = true})
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), {locked = true})
+hl.bind("SUPER + Print",
+    hl.dsp.exec_cmd("grimblast --notify copysave active"),
+    {locked = true, description = "Screenshot active window"})
 
--- Screen brightness
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s +5%"), {locked = true, repeating = true})
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 5%-"), {locked = true, repeating = true})
+hl.bind("SUPER + ALT + Print",
+    hl.dsp.exec_cmd("grimblast --notify copysave area"),
+    {locked = true, description = "Screenshot selection"})
+
+-- Audio
+hl.bind("XF86AudioRaiseVolume",
+    hl.dsp.exec_cmd("pamixer -i 5"),
+    {locked = true, repeating = true, description = "Volume up"})
+
+hl.bind("XF86AudioLowerVolume",
+    hl.dsp.exec_cmd("pamixer -d 5"),
+    {locked = true, repeating = true, description = "Volume down"})
+
+hl.bind("XF86AudioMicMute",
+    hl.dsp.exec_cmd("pamixer --default-source -m"),
+    {locked = true, description = "Toggle microphone mute"})
+
+hl.bind("XF86AudioMute",
+    hl.dsp.exec_cmd("pamixer -t"),
+    {locked = true, description = "Toggle audio mute"})
+
+hl.bind("XF86AudioPlay",
+    hl.dsp.exec_cmd("playerctl play-pause"),
+    {locked = true, description = "Play/Pause media"})
+
+hl.bind("XF86AudioPause",
+    hl.dsp.exec_cmd("playerctl play-pause"),
+    {locked = true, description = "Pause media"})
+
+hl.bind("XF86AudioNext",
+    hl.dsp.exec_cmd("playerctl next"),
+    {locked = true, description = "Next track"})
+
+hl.bind("XF86AudioPrev",
+    hl.dsp.exec_cmd("playerctl previous"),
+    {locked = true, description = "Previous track"})
+
+-- Brightness
+hl.bind("XF86MonBrightnessUp",
+    hl.dsp.exec_cmd("brightnessctl s +5%"),
+    {locked = true, repeating = true, description = "Brightness up"})
+
+hl.bind("XF86MonBrightnessDown",
+    hl.dsp.exec_cmd("brightnessctl s 5%-"),
+    {locked = true, repeating = true, description = "Brightness down"})
+
+-- Show searchable keybind list
+hl.bind(mainMod .. " + F1",
+    hl.dsp.exec_cmd("~/.config/hypr/scripts/keybinds.sh"),
+    { description = "Show keybinds" })
+
+-- Reload Hyprland config
+hl.bind(mainMod .. " + SHIFT + R",
+    hl.dsp.exec_cmd("hyprctl reload"),
+    { description = "Reload Hyprland config" })
+
+-- Reboot computer
+hl.bind(mainMod .. " + SHIFT + DELETE",
+    hl.dsp.exec_cmd("systemctl reboot"),
+    { description = "Reboot computer" })
+
+-- Shutdown computer
+hl.bind(mainMod .. " + SHIFT + END",
+    hl.dsp.exec_cmd("systemctl poweroff"),
+    { description = "Power off computer" })
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
